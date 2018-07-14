@@ -1,0 +1,57 @@
+EJERCICIO 3
+
+ create database gestion_colegio;
+create table curso(id serial, nombre varchar, primary key(id));
+
+create table aula(id serial, nombre varchar, primary key(id));
+create table contrato(id serial, nombre varchar, primary key(id));
+
+ create table alumno(id serial, nombre varchar, curso_id integer, primary key(id), foreign key(curso_id) references curso(id));
+
+create table profesor(id serial, nombre varchar, contrato_id integer, primary key(id), foreign key(contrato_id) references contrato(id));
+
+create table asignatura(id serial, nombre varchar, profesor_id integer, aula_id integer, primary key(id), foreign key(profesor_id) references profesor(id), foreign key(aula_id) references aula(id));
+create table curso_asignatura(id serial, asignatura_id integer, curso_id integer, primary key(id), foreign key(asignatura_id) references asignatura(id), foreign key(curso_id) references curso(id));
+
+
+EJERCICIO 2 
+
+create database publicaciones;
+
+create table autor(id serial, nombre varchar, primary key(id));
+
+create table formato(id serial, nombre varchar, primary key(id));
+
+create table categoria(id serial, nombre varchar, primary key(id));
+
+ create table revista(id serial, nombre varchar, categoria_id integer, primary key(id), foreign key(categoria_id) references categoria(id));
+
+create table articulo(id serial, titulo varchar, revista_id integer, primary key(id), foreign key(revista_id) references revista(id));
+
+create table autor_articulo(id serial, autor_id integer, revista_id integer, primary key(id), foreign key(revista_id) references revista(id), foreign key(autor_id) references autor(id));
+
+
+
+
+EJERCICIO 1
+
+create database envios;
+create table conductor(id serial, name varchar,rut varchar, primary key(id));
+
+
+ create table camion(id serial, patente varchar, conductor_id integer, primary key(id), foreign key(conductor_id) references conductor(id));
+
+
+ create table envio(id serial,conductor_id integer, camion_id integer, primary key(id), foreign key(conductor_id) references conductor(id), foreign key(camion_id) references camion(id) )
+envios-# ;
+
+create table ciudad(id serial, nombre varchar, primary key(id));
+
+create table comuna(id serial, nombre varchar, ciudad_id integer, primary key(id), foreign key(ciudad_id) references ciudad(id));
+cac
+create table cliente(id serial, nombre varchar, comuna_id integer, primary key(id), foreign key(comuna_id) references comuna(id));
+
+
+create table paquete(id serial, envio_id integer,cliente_id integer, primary key(id), foreign key(envio_id) references envio(id), foreign key (cliente_id) references cliente(id));
+
+
